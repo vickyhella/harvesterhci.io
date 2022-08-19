@@ -29,7 +29,7 @@ const config = {
       },
     },
   },
-
+  themes: ["docusaurus-theme-openapi-docs"],
   presets: [
     [
       "classic",
@@ -41,6 +41,8 @@ const config = {
           // Please change this to your repo.
           editUrl:
             "https://github.com/harvester/harvesterhci.io/edit/main/",
+            docLayoutComponent: "@theme/DocPage",
+            docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
           lastVersion: "current",
           versions: {
             current: {
@@ -149,6 +151,23 @@ const config = {
         postsPerPage: 10,
       },
     ],
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: "apiDocs",
+        docsPluginId: "classic",
+        config: {
+          petstore: { // Note: petstore key is treated as the <id> and can be used to specify an API doc instance when using CLI commands
+            specPath: "api/api.json", // Path to designated spec file
+            outputDir: "docs/reference/", // Output directory for generated .mdx docs
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+          },
+        }
+      },
+    ]
   ],
 };
 
